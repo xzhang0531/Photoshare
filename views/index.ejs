@@ -1,4 +1,10 @@
 <h1>Welcome</h1>
-
+<% if(message){ %>
+	<p><%= message %></p>
+<% } %>
 <a href="/login">login</a><br>
-<a href="/signup">sign up</a>
+<a href="/signup">sign up</a><br>
+<a href="/logout">logout</a>
+<br>
+<br>
+<a href="/secret">The secret page</a>
