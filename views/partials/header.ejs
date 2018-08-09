@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Photoshare</title>
+	<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+	<a href="/login" class="btn btn-outline-light">Login</a>
+				<a href="/signup" class="btn btn-outline-light">Sign Up</a>
+</head>
+<body>
+	<nav class="navbar navbar-dark bg-dark">
+		<a class="navbar-brand" href="/">
+    <img src="/docs/4.1/assets/brand/bootstrap-solid.svg" width="30" height="30" class="d-inline-block align-top" alt="">
+    Photoshare
+		</a>
+		<div>
+			<% if(!currentUser){ %>
+				<a href="/login" class="btn btn-outline-light">Login</a>
+				<a href="/signup" class="btn btn-outline-light">Sign Up</a>
+			<% }else{ %>
+				<a href="/logout" class="btn btn-outline-light">Logout</a>
+			<% } %>
+		</div>
+		
+	</nav>
