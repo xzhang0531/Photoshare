@@ -16,7 +16,6 @@ router.post("/signup", function(req, res) {
 			return res.render("signup");
 		}
 		passport.authenticate("local")(req, res, function(){
-			req.session.message = "Thanks for join photoshare!";
 			res.redirect("/");
 		});
 	})
@@ -35,7 +34,6 @@ router.post("/login", passport.authenticate("local", {
 
 router.get("/logout", function(req, res) {
 	req.logout();
-	req.session.message = "You have successfully logout.";
 	res.redirect("/");
 });
 

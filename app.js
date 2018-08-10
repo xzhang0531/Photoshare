@@ -10,6 +10,7 @@ var authRoutes  = require("./routes/auth")
 var indexRoutes = require("./routes/index")
 
 var app = express();
+app.use(express.static(__dirname + '/public'));
 mongoose.connect("mongodb://admin:sss5533@127.0.0.1:27017/photoshare?authSource=admin", { useNewUrlParser: true });
 
 app.set("view engine", "ejs");

@@ -3,8 +3,7 @@
 <head>
 	<title>Photoshare</title>
 	<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-	<a href="/login" class="btn btn-outline-light">Login</a>
-				<a href="/signup" class="btn btn-outline-light">Sign Up</a>
+	<link rel="stylesheet" type="text/css" href="/assets/css/style.css">
 </head>
 <body>
 	<nav class="navbar navbar-dark bg-dark">
@@ -17,6 +16,7 @@
 				<a href="/login" class="btn btn-outline-light">Login</a>
 				<a href="/signup" class="btn btn-outline-light">Sign Up</a>
 			<% }else{ %>
+				<a href="#" class="text-light"><%= currentUser.username %>, Welcome back.</a>
 				<a href="/logout" class="btn btn-outline-light">Logout</a>
 			<% } %>
 		</div>

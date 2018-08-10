@@ -1,14 +1,11 @@
 <% include partials/header%>
 
-<h1>Welcome</h1>
-<% if(message){ %>
-	<p><%= message %></p>
-<% } %>
-<a href="/login">login</a><br>
-<a href="/signup">sign up</a><br>
-<a href="/logout">logout</a>
-<br>
-<br>
-<a href="/secret">The secret page</a>
+	<div class="mainpic">
+		<h1 class="display-4 text-light">Welcome to Photoshare.</h1>
+		<p class="lead text-light">Currently just for testing the MEAN stack. However, give it a try if you are interested!</p>
+		<a class="btn btn-lg btn-primary" href="/secret">The secret page</a>
+	</div>
+
+
 
 <% include partials/footer%>
