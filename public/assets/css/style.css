@@ -1,7 +1,16 @@
-.mainpic{
+#idx {
 	background: url(../images/background.jpg);
-	height: 350px;
+	background-size: auto;
+	height: 100%;
+	width: 100%;
+	position: fixed;
 }
+
+.navbar {
+	border-bottom: solid 3px rgb(122,113,231);
+}
+
+
 
 .mainpic h1 {
 	padding-top: 80px;
@@ -16,3 +25,28 @@
 .mainpic a {
 	margin-left: 80px;
 }
+
+
+.sidenav {
+    height: 100%;
+    width: 300px;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    background-color: rgba(99,99,50,0.6);
+    overflow-x: hidden;
+    padding-top: 20px;
+}
+
+.sidenav a {
+    padding: 6px 8px 6px 16px;
+    text-decoration: none;
+    font-size: 25px;
+    color: rgb(255,255,255);
+    display: block;
+}
+
+.sidenav a:hover {
+    color: #f1f1f1;
+}
+
