@@ -8,10 +8,12 @@ var bodyParser    = require("body-parser");
 //routes
 var authRoutes  = require("./routes/auth")
 var indexRoutes = require("./routes/index")
+var photoRoutes = require("./routes/photo")
 
 var app = express();
 app.use(express.static(__dirname + '/public'));
 mongoose.connect("mongodb://admin:sss5533@127.0.0.1:27017/photoshare?authSource=admin", { useNewUrlParser: true });
+
 
 app.set("view engine", "ejs");
 app.use(bodyParser.urlencoded({extended: true}));
@@ -35,7 +37,7 @@ app.use(function(req, res, next){
 
 app.use(authRoutes);
 app.use(indexRoutes);
-
+app.use(photoRoutes);
 
 app.listen(3000, function() {
 	console.log("Server started");
