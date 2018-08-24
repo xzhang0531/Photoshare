@@ -7,7 +7,14 @@ var multer = require("multer");
 var GridFsStorage = require("multer-gridfs-storage");
 var Grid = require("gridfs-stream");
 var crypto = require("crypto");
+var Album = require("../models/album");
 
+function isLogged(req, res, next){
+	if(req.isAuthenticated()){
+		return next();
+	}
+	res.redirect("/login");
+}
 
 //initialize the gridfs stream
 var conn = mongoose.connection;
@@ -44,12 +51,18 @@ router.get("/photo", function (req, res) {
 	res.render("photo");
 });
 
-router.get("/photo/upload", function (req, res) {
-	res.render("upload");
+router.get("/photo/upload", isLogged, function (req, res) {
+	Album.find({owner: req.user.username}, function(err, albums){
+		if(err){
+			console.log(err);
+		}else{
+			res.render("upload", {albums: albums});
+		}
+	});
 });
 
-router.post("/photo", upload.single("file"), function(req, res) {
-	res.json({ file: req.file});
+router.post("/photo", isLogged, upload.single("image"), function(req, res) {
+	res.json({ image: req.file});
 });
 
 

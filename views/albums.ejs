@@ -1,0 +1,16 @@
+<% include partials/header%>
+
+<h1>This will be the album page!</h1>
+
+<% if(Object.keys(albums).length === 0){ %>
+	<p>You do not have any album.</p>
+	<a href="/albums/create">Create one</a>
+<% }else{ albums.forEach(function(album){ %>
+	<div>
+		<a href="#"><%= album.albumname %></a>
+	</div>
+<% }); } %>
+
+
+
+<% include partials/footer%>

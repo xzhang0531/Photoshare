@@ -9,6 +9,8 @@ var bodyParser    = require("body-parser");
 var authRoutes  = require("./routes/auth")
 var indexRoutes = require("./routes/index")
 var photoRoutes = require("./routes/photo")
+var albumRoutes = require("./routes/album")
+
 
 var app = express();
 app.use(express.static(__dirname + '/public'));
@@ -38,6 +40,7 @@ app.use(function(req, res, next){
 app.use(authRoutes);
 app.use(indexRoutes);
 app.use(photoRoutes);
+app.use(albumRoutes);
 
 app.listen(3000, function() {
 	console.log("Server started");
