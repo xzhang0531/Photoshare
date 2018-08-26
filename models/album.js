@@ -1,7 +1,9 @@
 var mongoose = require("mongoose");
 
-var photoSchema = new mongoose.Schema({
-	photoname: String
+var imageSchema = new mongoose.Schema({
+	imageid: String,
+	imagename: String,
+	description: String
 });
 
 
@@ -9,7 +11,7 @@ var albumSchema = new mongoose.Schema({
 	albumname: String,
 	albumtype: String,
 	owner: String,
-	photos: [photoSchema]
+	images: [imageSchema]
 });
 
 var albumModel = mongoose.model("Album", albumSchema);

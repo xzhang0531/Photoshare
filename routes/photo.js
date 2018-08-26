@@ -16,10 +16,12 @@ function isLogged(req, res, next){
 	res.redirect("/login");
 }
 
+
 //initialize the gridfs stream
+let gfs;
 var conn = mongoose.connection;
 conn.once('open', function() {
-  var gfs = Grid(conn.db, mongoose.mongo)
+  gfs = Grid(conn.db, mongoose.mongo)
   gfs.collection('images');
 });
 
@@ -62,7 +64,28 @@ router.get("/photo/upload", isLogged, function (req, res) {
 });
 
 router.post("/photo", isLogged, upload.single("image"), function(req, res) {
-	res.json({ image: req.file});
+	var albumid = req.body.albumid;
+	
+	var imageid = req.file.id;
+	var imagename = req.body.imagename;
+	var description = req.body.description;
+
+	var newImage = {
+		imageid: imageid,
+		imagename: imagename,
+		description: description
+	}
+
+	Album.findByIdAndUpdate(albumid, 
+		{$push: {images: newImage}},
+		{safe: true, upsert:true, new:true},
+		function(err, album){
+		if(err){
+			console.log(err);
+		}else{
+			res.redirect("albums");
+		}
+	});
 });
 
 

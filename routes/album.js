@@ -1,7 +1,15 @@
 var express = require("express");
 var router = express.Router();
 var Album = require("../models/album");
+var mongoose = require("mongoose");
+var Grid = require("gridfs-stream");
 
+let gfs;
+var conn = mongoose.connection;
+conn.once('open', function() {
+  gfs = Grid(conn.db, mongoose.mongo)
+  gfs.collection('images');
+});
 
 
 function isLogged(req, res, next){
@@ -42,6 +50,34 @@ router.post("/albums", isLogged, function(req, res) {
 router.get("/albums/create", isLogged, function (req, res) {
 	res.render("createAlbum");
 });
+
+router.get("/albums/:id", isLogged, function (req, res) {
+	albumId = req.params.id;
+	var images;
+	Album.findById(albumId, function(err, album){
+		if(err){
+			console.log(err);
+		}else{
+			images = album.images;
+		}
+	});
+
+	console.log(images);
+	res.render("index");
+
+	// var files = []
+
+	// images.forEach(function(image){
+	// 	var imageId = image.imageid;
+	// 	gfs.files.findOne({_id:imageid}, function(err, file){
+	// 		if(file){
+	// 			files.push(file);
+	// 		}
+	// 	});
+	// });
+	// res.render("album", {files: files});
+});
+
 
 
 module.exports = router;
