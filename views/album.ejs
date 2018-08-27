@@ -1,7 +1,9 @@
 <h1><%= album.albumname %></h1>
 
 <% album.images.forEach(function(image){ %>
-	<div class="card card-body mb-3">
+	<div class="thumbnail">
 		<img src="/photo/<%= image.imageid %>">
+		<h2><%= image.imagename %></h2>
+		<p><%= image.description %></p>
 	</div>	
 <% })%>

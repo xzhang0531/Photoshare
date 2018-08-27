@@ -108,10 +108,4 @@ router.get("/photo/:id", function(req, res) {
 
 
 
-
-
-
-
-
-
 module.exports = router;
