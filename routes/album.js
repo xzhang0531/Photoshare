@@ -53,29 +53,13 @@ router.get("/albums/create", isLogged, function (req, res) {
 
 router.get("/albums/:id", isLogged, function (req, res) {
 	albumId = req.params.id;
-	var images;
 	Album.findById(albumId, function(err, album){
 		if(err){
-			console.log(err);
+			return res.status(404).json({err: 'Not exists'});
 		}else{
-			images = album.images;
+			res.render("album", {album: album})
 		}
-	});
-
-	console.log(images);
-	res.render("index");
-
-	// var files = []
-
-	// images.forEach(function(image){
-	// 	var imageId = image.imageid;
-	// 	gfs.files.findOne({_id:imageid}, function(err, file){
-	// 		if(file){
-	// 			files.push(file);
-	// 		}
-	// 	});
-	// });
-	// res.render("album", {files: files});
+	});	
 });
 
 

@@ -9,6 +9,8 @@ var Grid = require("gridfs-stream");
 var crypto = require("crypto");
 var Album = require("../models/album");
 
+eval(`Grid.prototype.findOne = ${Grid.prototype.findOne.toString().replace('nextObject', 'next')}`);
+
 function isLogged(req, res, next){
 	if(req.isAuthenticated()){
 		return next();
@@ -87,6 +89,29 @@ router.post("/photo", isLogged, upload.single("image"), function(req, res) {
 		}
 	});
 });
+
+
+router.get("/photo/:id", function(req, res) {
+	gfs.findOne({_id: req.params.id}, function(err, file){
+		if (!file || file.length === 0) {
+			return res.status(404).json({err: 'Not exists'});
+		}
+
+		if (file.contentType === 'image/jpeg' || file.contentType === 'image/png') {
+			var readstream = gfs.createReadStream(file._id);
+			readstream.pipe(res);
+		} else {
+			return res.status(404).json({err: 'Not an image'});
+		}
+	});
+})
+
+
+
+
+
+
+
 
 
 module.exports = router;
