@@ -53,5 +53,10 @@
 .samesize {
     width: 230px;
     height:230px;
-    object-fit: cover;
+    object-fit: contain;
+}
+.album-show {
+    width: 350px;
+    height:230px;
+    object-fit: contain;
 }
