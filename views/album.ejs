@@ -1,7 +1,17 @@
 <% include partials/header%>
 
 <div class="container">
-	<h1><%= album.albumname %></h1>
+	<nav aria-label="breadcrumb" class="mt-2">
+		<ol class="breadcrumb">
+			<li class="breadcrumb-item my-auto"><a href="/">Home</a></li>
+			<li class="breadcrumb-item my-auto"><a href="/albums">My Albums</a></li>
+			<li class="breadcrumb-item my-auto active" aria-current="page"><%= album.albumname %></li>
+			<div class="ml-auto">
+				<a href="/photo/upload" class="btn btn-secondary btn-sm"><i class="fas fa-upload mr-1"></i>Upload</a>
+			</div>
+		</ol>
+
+	</nav>
 	<div class="row">
 		<% album.images.forEach(function(image){ %>
 			<div class="col-md-3">
