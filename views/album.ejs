@@ -1,9 +1,16 @@
-<h1><%= album.albumname %></h1>
+<% include partials/header%>
 
-<% album.images.forEach(function(image){ %>
-	<div class="thumbnail">
-		<img src="/photo/<%= image.imageid %>">
-		<h2><%= image.imagename %></h2>
-		<p><%= image.description %></p>
-	</div>	
-<% })%>
+<div class="container">
+	<h1><%= album.albumname %></h1>
+	<div class="row">
+		<% album.images.forEach(function(image){ %>
+			<div class="col-md-3">
+				<img class="img-thumbnail" src="/photo/<%= image.imageid %>">
+				<h2><%= image.imagename %></h2>
+				<p><%= image.description %></p>
+			</div>	
+		<% })%>
+	</div>
+</div>
+
+<% include partials/footer%>
