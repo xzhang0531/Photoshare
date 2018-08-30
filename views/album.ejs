@@ -22,12 +22,46 @@
 			</div>
 		<% } else { %>
 			<% album.images.forEach(function(image){ %>
-				<a href="/photo/<%= image.imageid %>" class="col-md-4 mb-2">
+				<button type="button" class="btn btn-link col-md-4 mb-2" data-toggle="modal" data-target="#imageShow" data-imageid="<%= image.imageid %>">
 					<img class="img-thumbnail rounded mx-auto d-block album-show" src="/photo/<%= image.imageid %>">
-				</a>	
+				</button>
 			<% }); %>
 		<% } %>
 	</div>
 </div>
+
+
+<div class="modal fade" id="imageShow" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Photo name</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <img class="album-modal-image img-thumbnail" src="">
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<script type="text/javascript">
+$('#imageShow').on('show.bs.modal', function (event) {
+  var button = $(event.relatedTarget)
+  var recipient = button.data('imageid')
+  var modal = $(this)
+  var imageSrc = '/photo/' + recipient;
+  modal.find('.modal-body img').attr("src", imageSrc)
+})
+</script>
+
+
+
+
+
 
 <% include partials/footer%>
