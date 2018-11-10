@@ -1,33 +1,33 @@
 <% include partials/header%>
 
 <div class="container">
-	<nav aria-label="breadcrumb" class="mt-2">
-		<ol class="breadcrumb">
-			<li class="breadcrumb-item my-auto"><a href="/">Home</a></li>
-			<li class="breadcrumb-item my-auto"><a href="/albums">My Albums</a></li>
-			<li class="breadcrumb-item my-auto active" aria-current="page"><%= album.albumname %></li>
-			<div class="ml-auto">
-				<a href="/photo/upload" class="btn btn-secondary btn-sm"><i class="fas fa-upload mr-1"></i>Upload</a>
-			</div>
-		</ol>
+  <nav aria-label="breadcrumb" class="mt-2">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item my-auto"><a href="/">Home</a></li>
+      <li class="breadcrumb-item my-auto"><a href="/<%= album.owner %>/albums">My Albums</a></li>
+      <li class="breadcrumb-item my-auto active" aria-current="page"><%= album.albumname %></li>
+      <div class="ml-auto">
+        <a href="/photo/upload" class="btn btn-secondary btn-sm"><i class="fas fa-upload mr-1"></i>Upload</a>
+      </div>
+    </ol>
 
-	</nav>
+  </nav>
 
-	<div class="row">
-		<% if(album.images.length == 0){ %>
-			<div>
-				<img class="rounded mx-auto d-block" style="width: 30%;" src="/assets/images/no-album.jpg">
-				<h4 class="mt-3 text-center">No image.<a href="/photo/upload"> Upload</a> one?</h4>
-				
-			</div>
-		<% } else { %>
-			<% album.images.forEach(function(image){ %>
-				<button type="button" class="btn btn-link col-md-4 mb-2" data-toggle="modal" data-target="#imageShow" data-imageid="<%= image.imageid %>">
-					<img class="img-thumbnail rounded mx-auto d-block album-show" src="/photo/<%= image.imageid %>">
-				</button>
-			<% }); %>
-		<% } %>
-	</div>
+  <div class="row">
+    <% if(album.images.length == 0){ %>
+      <div>
+        <img class="rounded mx-auto d-block" style="width: 30%;" src="/assets/images/no-album.jpg">
+        <h4 class="mt-3 text-center">No image.<a href="/photo/upload"> Upload</a> one?</h4>
+        
+      </div>
+    <% } else { %>
+      <% album.images.forEach(function(image){ %>
+        <button type="button" class="btn btn-link col-md-4 mb-2" data-toggle="modal" data-target="#imageShow" data-imageid="<%= image.imageid %>" data-imagename="<%= image.imagename %>">
+          <img class="img-thumbnail rounded mx-auto d-block album-show" src="/photo/<%= image.imageid %>">
+        </button>
+      <% }); %>
+    <% } %>
+  </div>
 </div>
 
 
@@ -41,7 +41,14 @@
         </button>
       </div>
       <div class="modal-body">
-        <img class="album-modal-image img-thumbnail" src="">
+        <div class="col-md-12">
+          <img class="album-modal-image img-thumbnail" src="">
+        </div>
+        
+        <div>
+          <a href="" target="_blank" class="btn btn-secondary">View in full screen</a>
+        </div>
+
       </div>
     </div>
   </div>
@@ -52,16 +59,15 @@
 <script type="text/javascript">
 $('#imageShow').on('show.bs.modal', function (event) {
   var button = $(event.relatedTarget)
-  var recipient = button.data('imageid')
+  var imgid = button.data('imageid')
+  var imgname = button.data('imagename')
   var modal = $(this)
-  var imageSrc = '/photo/' + recipient;
+  var imageSrc = '/photo/' + imgid;
   modal.find('.modal-body img').attr("src", imageSrc)
+  modal.find('.modal-body a').attr("href", imageSrc)
+  modal.find('.modal-title').text(imgname)
 })
 </script>
-
-
-
-
 
 
 <% include partials/footer%>

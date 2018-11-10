@@ -20,14 +20,20 @@ function isLogged(req, res, next){
 }
 
 
-router.get("/albums", isLogged, function (req, res) {
-	Album.find({owner: req.user.username}, function(err, albums){
-		if(err){
-			console.log(err);
-		}else{
-			res.render("albums", {albums: albums});
-		}
-	});
+router.get("/:username/albums", isLogged, function (req, res) {
+	var destUsername = req.params.username;
+	if(destUsername == req.user.username){
+		Album.find({owner: req.user.username}, function(err, albums){
+			if(err){
+				console.log(err);
+			}else{
+				res.render("myAlbums", {albums: albums});
+			}
+		});
+	}else{
+		res.render("secret");
+	}
+	
 });
 
 router.post("/albums", isLogged, function(req, res) {
