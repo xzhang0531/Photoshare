@@ -36,36 +36,53 @@ router.get("/:username/albums", isLogged, function (req, res) {
 	
 });
 
-router.post("/albums", isLogged, function(req, res) {
-	var albumname = req.body.albumname;
-	var albumtype = req.body.albumtype;
-	var owner = req.user.username;
-	var newAlbum = {albumname: albumname,
-					albumtype: albumtype,
-					owner: owner};
-	Album.create(newAlbum, function(err, newlyCreated){
-		if(err){
-			console.log(err);
-		} else{
-			res.redirect("albums");
-		}
-	});
+router.post("/:username/albums", isLogged, function(req, res) {
+	var destUsername = req.params.username;
+	if(destUsername == req.user.username){
+		var albumname = req.body.albumname;
+		var albumtype = req.body.albumtype;
+		var owner = req.user.username;
+		var newAlbum = {albumname: albumname,
+						albumtype: albumtype,
+						owner: owner};
+		Album.create(newAlbum, function(err, newlyCreated){
+			if(err){
+				console.log(err);
+			} else{
+				res.redirect("/"+req.user.username+"/albums");
+			}
+		});
+	}else{
+		res.render("secret");
+	}
+	
 });
 
 
-router.get("/albums/create", isLogged, function (req, res) {
-	res.render("createAlbum");
+router.get("/:username/albums/create", isLogged, function (req, res) {
+	var destUsername = req.params.username;
+	if(destUsername == req.user.username){
+		res.render("createAlbum");
+	}else{
+		res.render("secret");
+	}
 });
 
-router.get("/albums/:id", isLogged, function (req, res) {
-	albumId = req.params.id;
-	Album.findById(albumId, function(err, album){
-		if(err){
-			return res.status(404).json({err: 'Not exists'});
-		}else{
-			res.render("album", {album: album})
-		}
-	});	
+router.get("/:username/albums/:id", isLogged, function (req, res) {
+	var destUsername = req.params.username;
+	var albumId = req.params.id;
+	if(destUsername == req.user.username){
+		var albumId = req.params.id;
+		Album.findById(albumId, function(err, album){
+			if(err){
+				return res.status(404).json({err: 'Not exists'});
+			}else{
+				res.render("myAlbum", {album: album})
+			}
+		});	
+	}else{
+		res.render("secret");
+	}
 });
 
 

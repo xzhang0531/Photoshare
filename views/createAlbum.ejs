@@ -5,7 +5,7 @@
 		<h1 style="text-align: center; width: 100%; margin-top: 40px">Create New Album</h1>
 
 		<div style="width: 40%; margin: 25px auto;">
-			<form action="/albums" method="post">
+			<form action="/<%= currentUser.username %>/albums" method="post">
 				<div class="form-group">
 					<label for="albumname">Album name:</label>
 					<input class="form-control" type="text" name="albumname">

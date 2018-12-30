@@ -8,10 +8,11 @@ body {
 	height: 100%;
 	width: 100%;
 	position: fixed;
+    margin-left: 0px;
 }
 
 .navbar {
-	border-bottom: solid 3px rgb(122,113,231);
+	border-bottom: solid 4px rgb(122,113,231);
 }
 
 
