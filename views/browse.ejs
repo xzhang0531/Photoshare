@@ -1,0 +1,36 @@
+<% include partials/header%>
+<div class="container">
+	<div class="jumbotron">
+		<h1 class="display-4">The top 50 hotest albums</h1>
+	</div>
+
+	<div class="row">
+		<div class="list-group col-md-2">
+			<button type="button" class="list-group-item list-group-item-action active">Hot</button>
+			<button type="button" class="list-group-item list-group-item-action">Followed</button>
+			<button type="button" class="list-group-item list-group-item-action">Search</button>
+		</div>
+		<div class="col-md-10">
+			<% albums.forEach(function(album){ %>
+				<% if(album.images.length != 0){ %>
+					<div class="row">
+						<a href="/<%= album.owner %>/albums/<%= album.id %>" class="font-weight-bold" style="word-wrap:break-word;" ><%= album.albumname %></a>
+					</div>
+					<div class="row">
+						<% for(i = 0; i < album.images.length && i < 4; i++) { %>
+							<div class="col-md-3 mb-3">
+								<a href="/<%= album.owner %>/albums/<%= album.id %>">
+									<img class="img-thumbnail rounded mx-auto d-block samesize" src="/photo/<%= album.images[i].imageid %>">
+								</a>
+							</div>
+						<% } %>
+					</div>
+					<hr class="my-4">
+				<% } %>
+			<% }); %>
+		</div>
+	</div>
+</div>
+
+
+<% include partials/footer%>

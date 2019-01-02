@@ -44,6 +44,7 @@ router.post("/:username/albums", isLogged, function(req, res) {
 		var owner = req.user.username;
 		var newAlbum = {albumname: albumname,
 						albumtype: albumtype,
+						viewcount: 0,
 						owner: owner};
 		Album.create(newAlbum, function(err, newlyCreated){
 			if(err){
@@ -77,6 +78,9 @@ router.get("/:username/albums/:id", isLogged, function (req, res) {
 			if(err){
 				return res.status(404).json({err: 'Not exists'});
 			}else{
+				if(album.owner != destUsername){
+					return res.status(404).json({err: 'Not exists'});
+				}
 				res.render("myAlbum", {album: album})
 			}
 		});	

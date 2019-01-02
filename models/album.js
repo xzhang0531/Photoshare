@@ -11,6 +11,7 @@ var albumSchema = new mongoose.Schema({
 	albumname: String,
 	albumtype: String,
 	owner: String,
+	viewcount: Number,
 	images: [imageSchema]
 });
 

@@ -85,7 +85,7 @@ router.post("/photo", isLogged, upload.single("image"), function(req, res) {
 		if(err){
 			console.log(err);
 		}else{
-			res.redirect("albums");
+			res.redirect("/" + req.user.username +"/albums");
 		}
 	});
 });
