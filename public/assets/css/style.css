@@ -74,3 +74,14 @@ body {
     display: block;
 
 }
+
+#croppage {
+  background: #FFF;
+  padding: 20px;
+  margin: 20px;
+}
+
+#cropwindow {
+  width: 300px;
+  height: 300px;
+}

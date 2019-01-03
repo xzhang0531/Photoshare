@@ -8,6 +8,9 @@ var GridFsStorage = require("multer-gridfs-storage");
 var Grid = require("gridfs-stream");
 var crypto = require("crypto");
 var Album = require("../models/album");
+var User = require("../models/user");
+
+
 
 eval(`Grid.prototype.findOne = ${Grid.prototype.findOne.toString().replace('nextObject', 'next')}`);
 
@@ -106,6 +109,18 @@ router.get("/photo/:id", function(req, res) {
 	});
 })
 
+
+router.post("/:username/profile/profilephoto", isLogged, upload.single("profilePhoto"), function(req, res) {
+	var imageid = req.file.id;
+	User.findOneAndUpdate({username: req.user.username}, {$set:{profilephotoid: imageid}}, function(err, albums){
+		if(err){
+			console.log(err);
+		}else{
+			res.redirect("/" + req.user.username + "/profile/profilephoto/crop");
+		}
+	});
+
+});
 
 
 module.exports = router;
