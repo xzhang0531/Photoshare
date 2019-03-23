@@ -1,6 +1,6 @@
 <% include partials/header%>
 <div class="container">
-	<div class="jumbotron">
+	<div class="jumbotron mt-2">
 		<h1 class="display-4">The top 50 hotest albums</h1>
 	</div>
 
@@ -15,6 +15,8 @@
 				<% if(album.images.length != 0){ %>
 					<div class="row">
 						<a href="/<%= album.owner %>/albums/<%= album.id %>" class="font-weight-bold" style="word-wrap:break-word;" ><%= album.albumname %></a>
+						<p>&nbsp;(Owner: <%= album.owner %> &nbsp;</p>
+						<p>View Count: <%= album.viewcount.toString() %>)</p>
 					</div>
 					<div class="row">
 						<% for(i = 0; i < album.images.length && i < 4; i++) { %>
@@ -25,10 +27,7 @@
 							</div>
 						<% } %>
 					</div>
-					<div class="row">
-						<p><%= album.owner %></p>
-						<p><%= album.viewcount.toString() %></p>
-					</div>
+
 					<hr class="my-4">
 				<% } %>
 			<% }); %>

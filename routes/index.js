@@ -27,7 +27,7 @@ router.get("/browse", function(req, res) {
 
 
 router.get("/secret", isLogged, function(req, res){
-	res.render("secret");
+	res.render("uploadProfilePhoto");
 });
 
 module.exports = router;

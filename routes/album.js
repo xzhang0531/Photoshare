@@ -85,7 +85,14 @@ router.get("/:username/albums/:id", isLogged, function (req, res) {
 			}
 		});	
 	}else{
-		res.render("secret");
+		var albumId = req.params.id;
+		Album.findByIdAndUpdate(albumId, {$inc:{viewcount: 1}}, function(err, album){
+			if(err){
+				return res.status(404).json({err: 'Not exists'});
+			}else{
+				res.render("userAlbum", {album: album})
+			}
+		});	
 	}
 });
 

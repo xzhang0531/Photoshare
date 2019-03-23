@@ -10,7 +10,7 @@ var authRoutes  = require("./routes/auth")
 var indexRoutes = require("./routes/index")
 var photoRoutes = require("./routes/photo")
 var albumRoutes = require("./routes/album")
-
+var commentRoutes = require("./routes/comment")
 
 var app = express();
 app.use(express.static(__dirname + '/public'));
@@ -41,6 +41,7 @@ app.use(authRoutes);
 app.use(indexRoutes);
 app.use(photoRoutes);
 app.use(albumRoutes);
+app.use(commentRoutes);
 
 app.listen(3000, function() {
 	console.log("Server started");

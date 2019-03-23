@@ -2,6 +2,9 @@ body {
     padding-top: 60px;
 }
 
+.top-10 { margin-top:10px; }
+.lr-70 { margin: 0px 70px; }
+
 #idx {
 	background: url(../images/background.jpg);
 	background-size: auto;
