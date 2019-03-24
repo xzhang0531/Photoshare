@@ -8,11 +8,11 @@
 			<form action="/<%= currentUser.username %>/albums" method="post">
 				<div class="form-group">
 					<label for="albumname">Album name:</label>
-					<input class="form-control" type="text" name="albumname">
+					<input class="form-control" type="text" name="albumname" required="true">
 				</div>
 				<div class="form-group">
 					<label for="type">Type</label>
-					<select class="form-control" name="albumtype">
+					<select class="form-control" name="albumtype" required="true">
 						<option value="Public">Public</option>
 						<option value="Private">Private</option>
 					</select>

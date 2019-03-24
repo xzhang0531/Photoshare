@@ -7,7 +7,7 @@ function isLogged(req, res, next){
 	if(req.isAuthenticated()){
 		return next();
 	}
-	res.redirect("/login");
+	res.render("login", {message: "Please login to continue!"});
 }
 
 
@@ -23,7 +23,13 @@ router.post("/:imgid/comment", isLogged, function(req, res) {
 		if(err){
 			console.log(err);
 		} else{
-			res.json({success: true});
+			Comment.find({imageid: req.params.imgid}, function(err, comments){
+				if(err){
+					console.log(err);
+				}else{
+					res.json({comments: comments});
+				}
+			});
 		}
 	});
 });

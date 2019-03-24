@@ -6,7 +6,7 @@ function isLogged(req, res, next){
 	if(req.isAuthenticated()){
 		return next();
 	}
-	res.redirect("/login");
+	res.render("login", {message: "Please login to continue!"});
 }
 
 

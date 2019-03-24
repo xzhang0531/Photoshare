@@ -1,9 +1,11 @@
 body {
     padding-top: 60px;
+    
 }
 
 .top-10 { margin-top:10px; }
 .lr-70 { margin: 0px 70px; }
+
 
 #idx {
 	background: url(../images/background.jpg);
@@ -11,6 +13,7 @@ body {
 	height: 100%;
 	width: 100%;
 	position: fixed;
+    margin-top: 0px;
     margin-left: 0px;
 }
 
@@ -18,20 +21,22 @@ body {
 	border-bottom: solid 4px rgb(122,113,231);
 }
 
-
+.mainpic {
+    padding-left: 25%;
+}
 
 .mainpic h1 {
-	padding-top: 80px;
-	padding-left: 80px;
+	padding-top: 15%;
+    font-size: 95px;
+    font-family: 'Niconne', cursive;
 }
 
+.niconne {
+    font-family: 'Niconne', cursive;
+}
 .mainpic p {
 	padding-top: 10px;
-	padding-left: 80px;
-}
-
-.mainpic a {
-	margin-left: 80px;
+    font-size: 22px;
 }
 
 

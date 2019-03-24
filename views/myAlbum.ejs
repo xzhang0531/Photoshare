@@ -41,13 +41,26 @@
         </button>
       </div>
       <div class="modal-body">
-        <div class="col-md-12">
+        <div class="row">
           <img class="album-modal-image img-thumbnail" src="">
         </div>
-        
-        <div>
-          <a href="" target="_blank" class="btn btn-secondary">View in full screen</a>
+        <div class="row top-10">
+            <a href="" target="_blank" class="btn btn-secondary btn-sm mx-auto">View in full screen</a>
         </div>
+        <div class="lr-70">
+          <form action="" method="post" id="form">
+            <div class="form-group row">
+                <label for="comment">Comment:</label>
+                <textarea class="form-control" rows="3" id="comment" name="commentContent"></textarea>
+                <button class="btn btn-secondary btn-sm ml-auto mt-2" id="submit">Submit</button>
+            </div>
+          </form>
+          <hr class="my-4">
+          <div id="comments">
+            
+          </div>
+        </div>
+        
 
       </div>
     </div>
@@ -58,6 +71,8 @@
 
 <script type="text/javascript">
 $('#imageShow').on('show.bs.modal', function (event) {
+  $('#comment').val("");
+  $('#comments').html("");
   var button = $(event.relatedTarget)
   var imgid = button.data('imageid')
   var imgname = button.data('imagename')
@@ -65,8 +80,37 @@ $('#imageShow').on('show.bs.modal', function (event) {
   var imageSrc = '/photo/' + imgid;
   modal.find('.modal-body img').attr("src", imageSrc)
   modal.find('.modal-body a').attr("href", imageSrc)
+  modal.find('.modal-body form').attr("action", "/"+imgid+"/comment")
   modal.find('.modal-title').text(imgname)
+  $.ajax({
+    type: 'GET',
+    url:'/' + imgid + '/comment',
+    success: function(result) {
+      result.comments.forEach(function(comment) {
+        $('#comments').append('<p><strong>' + comment.author + "</strong>: " + comment.content + '</p>')
+      })
+    }
+  });
 })
+
+
+$('#form').on('submit', function (event) {
+    event.preventDefault();
+    var form = $(this);
+    $.ajax({
+      type: form.attr('method'),
+      url: form.attr('action'),
+      data: form.serialize(),
+      success: function(result) {
+        alert("Submitted");
+        $('#comments').html("")
+        result.comments.forEach(function(comment) {
+          $('#comments').append('<p><strong>' + comment.author + "</strong>: " + comment.content + '</p>')
+        })
+        $('#comment').val("");
+      }
+    });
+});
 </script>
 
 
